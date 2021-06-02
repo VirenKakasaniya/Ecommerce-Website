@@ -1,7 +1,7 @@
 <p align="center">
   <p align="center">
     <a href="https://justdjango.com/?utm_source=github&utm_medium=logo" target="_blank">
-      <img src="https://github.com/VirenKakasaniya/Coursera_HTML/blob/main/logo.jpg" alt="JustDjango" height="130">
+      <img src="https://github.com/VirenKakasaniya/Coursera_HTML/blob/main/logo.jpg" alt="Viren Kakasaniya" height="130">
     </a>
   </p>
 </p>
