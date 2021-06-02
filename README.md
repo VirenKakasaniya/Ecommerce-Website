@@ -1,7 +1,7 @@
 <p align="center">
   <p align="center">
     <a href="https://justdjango.com/?utm_source=github&utm_medium=logo" target="_blank">
-      <img src="logo.jpg" alt="JustDjango" height="72">
+      <img src="https://github.com/VirenKakasaniya/Coursera_HTML/blob/main/logo.jpg" alt="JustDjango" height="130">
     </a>
   </p>
 </p>
@@ -12,13 +12,13 @@
 
 This is a  e-commerce website built with Django and Celery.
 
-## Quick demo of Customer unctionality
+## Quick demo of Customer Functionality
 
-![grab-landing-page](https://github.com/VirenKakasaniya/Coursera_HTML/blob/main/temp.gif)
+![Customer Functionality Demo](https://github.com/VirenKakasaniya/Ecommerce-Website/blob/master/Quick%20Demo/Customer%20functionality.gif)
 
-## Quick demo of Admin unctionality
+## Quick demo of Admin Functionality
 
-![grab-landing-page](https://github.com/VirenKakasaniya/Coursera_HTML/blob/main/temp.gif)
+![Admin Functionality Demo](https://github.com/VirenKakasaniya/Ecommerce-Website/blob/master/Quick%20Demo/Admin%20functionality.gif)
 
 
 
