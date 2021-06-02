@@ -1,0 +1,65 @@
+{% extends 'Adminsite/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<style>
+    .nice-select {
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    #id_image {
+        padding: 3px 0px 0px 6px;
+    }
+</style>
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Product Update Page</h1>
+				<nav class="d-flex align-items-center">
+					<a href="{% url 'AdminDashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Product-Upate</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+
+<!--================End Single Product Area =================-->
+
+<div class="container">
+    <div class="billing_details">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>PRODUCT Details</h3>
+                <form class="row contact_form" action="#" method="POST" 
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in product_form.visible_fields %}
+                    <div class="col-md-6 form-group p_star">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field|add_class:'form-control' }}
+                    </div>
+                    {% endfor %}
+
+
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="primary-btn">SAVE</button>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <a href="{% url 'deleteProduct' product.pk %}" class="primary-btn">Delete</a>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

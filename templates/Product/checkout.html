@@ -1,0 +1,157 @@
+{% extends 'Product/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Checkout</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="{% url 'Dashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Checkout</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details</h3>
+                    <form class="row contact_form" action="#" method="POST">
+                        {% csrf_token %}
+                        {% for field in User_form.visible_fields %}
+                        <div class="col-md-6 form-group p_star">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field|add_class:'form-control' }}
+                        </div>
+                        {% endfor %}
+                        {% for field in Profile_form.visible_fields %}
+                        <div class="col-md-6 form-group p_star">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field|add_class:'form-control' }}
+                        </div>
+                        {% endfor %}
+                        {% for field in ShippingAddress_form.visible_fields %}
+                        <div class="col-md-6 form-group p_star">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field|add_class:'form-control' }}
+                        </div>
+                        {% endfor %}
+
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">SAVE DETAILS</button>
+                        </div>
+        
+                    </form>
+                    {% if User_form.errors %}
+                        {% for field in User_form %}
+                            {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ field.label }} ==> </strong><span>{{ error|escape }}</strong>
+                                
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if Profile_form.errors %}
+                        {% for field in Profile_form %}
+                            {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ field.label }} ==> </strong><span>{{ error|escape }}</strong>
+                                
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if ShippingAddress_form.errors %}
+                        {% for field in ShippingAddress_form %}
+                            {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ field.label }} ==> </strong><span>{{ error|escape }}</strong>
+                                
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+                        <ul class="list">
+                            <li><a href="#">Product <span>Total</span></a></li>
+                            {% for item in items%}
+                            <li><a href="#">{{item.product.name}} <span class="middle"> x{{item.quantity}}</span> <span
+                                        class="last">${{item.get_total}}</span></a></li>
+                            <!-- <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span
+                                        class="last">$720.00</span></a></li>
+                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span
+                                        class="last">$720.00</span></a></li> -->
+                            {% endfor %}
+                        </ul>
+                        <ul class="list list_2">
+                            <!-- <li><a href="#">Subtotal <span>$2160.00</span></a></li> -->
+                            <!-- <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li> -->
+                            <li><a href="#">Total <span>${{order.get_cart_total}}</span></a></li>
+                        </ul>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="selector">
+                                <label for="f-option5">Check payments</label>
+                                <div class="check"></div>
+                            </div>
+                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
+                                Store Postcode.</p>
+                        </div>
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name="selector">
+                                <label for="f-option6">Paypal </label>
+                                <img src="img/product/card.jpg" alt="">
+                                <div class="check"></div>
+                            </div>
+                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
+                                account.</p>
+                        </div>
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option4" name="selector">
+                            <label for="f-option4">I’ve read and accept the </label>
+                            <a href="#">terms & conditions*</a>
+                        </div>
+                        <a class="primary-btn" id="final-btn"  href="{% url 'confirmation'%}">Proceed to Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Checkout Area =================-->
+
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+        {% for message in messages %}
+        alert('{{ message }}');
+        {% endfor %}
+    </script>
+    <script type="text/javascript">
+        var proceedBtn = document.getElementById('final-btn')
+        proceedBtn.addEventListener('click',function(){
+            alert('Your order submitted successfully');
+        })
+        // alert('Success');
+        
+    </script>
+{% endblock %}

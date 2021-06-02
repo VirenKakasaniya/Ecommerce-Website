@@ -1,0 +1,102 @@
+{% extends 'Product/main.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>My Orders</h1>
+				<nav class="d-flex align-items-center">
+					<a href="{% url 'Dashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">My Orders</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Order Details Area =================-->
+<section class="order_details section_gap">
+	<div class="container">
+		
+		
+		{% if prev_order %}
+		<div class="order_details_table">
+			<h2>Previous Order Details</h2>
+
+			{% for order,items in prev_order.items %}
+			
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Product</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Ordered Date</th>
+							<th scope="col">Transaction id</th>
+							<th scope="col">Total</th>
+							<th scope="col">Status</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items%}
+						<tr>
+							<td>
+								<p>{{item.product.name}}</p>
+							</td>
+							<td>
+								<h5>x {{item.quantity}}</h5>
+							</td>
+							<td>
+								<p>{{order.date_orderd}}</p>
+							</td>
+							<td>
+								<p>{{order.transaction_id}}</p>
+							</td>
+							<td>
+								<p>${{item.get_total}}</p>
+							</td>
+							<td>
+								<p>{{item.status|title}}</p>
+							</td>
+						</tr>
+						{% endfor %}
+				
+						<tr>
+							<td>
+								<h4>Total</h4>
+							</td>
+							<td>
+								<h5></h5>
+							</td>
+							<td>
+								<h5></h5>
+							</td>
+							<td>
+								<h5></h5>
+							</td>
+							<td>
+								<p>${{order.get_cart_total}}</p>
+							</td>
+							<td>
+								<h5>{{order.status|title}}</h5>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr style="background-color: black; height: 5px;">
+			
+			{% endfor %}
+		</div>
+		{% endif %}
+	</div>
+</section>
+<!--================End Order Details Area =================-->
+
+{% endblock %}
+

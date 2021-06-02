@@ -1,0 +1,98 @@
+{% extends 'AdminSite/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+	.filter-bar {
+		width: 80%;
+		margin: 0px auto;
+	}
+</style>
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Login/Register</h1>
+				<nav class="d-flex align-items-center">
+					<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="category.html">Home</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- start product Area -->
+<section class="owl-carousel active-product-area section_gap">
+	<!-- single product slide -->
+	<div class="single-product-slider">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<h1>All Products</h1>
+						<!-- <p>These are our Latest Products.</p> -->
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- single product -->
+				{% for product in products %}
+				<div class="col-lg-3 col-md-6">
+					<div class="single-product">
+						<a href="#"><img class="img-size" src="{{product.image.url}}" alt=""></a>
+						<div class="product-details">
+							<h6>{{product.name}}</h6>
+							<div class="price">
+								<h6>${{product.price}}</h6>
+								<h6 class="l-through">$210.00</h6>
+							</div>
+							<div class="prd-bottom">
+
+								<a href="{% url 'productUpdate' product.pk %}" class="social-info">
+									<span class="lnr lnr-move"></span>
+									<p class="hover-text">Update</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+<!-- end product Area -->
+
+<div class="filter-bar d-flex flex-wrap align-items-center">
+	{% if products.has_other_pages %}
+	<div class="pagination">
+		{% if products.has_previous %}
+		<a href="?page={{ products.previous_page_number }}" class="prev-arrow"><i class="fa fa-long-arrow-left"
+				aria-hidden="true"></i></a>
+		{% else %}
+		<a class="disabled"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+
+		{% endif %}
+		{% for i in products.paginator.page_range %}
+		{% if products.number == i %}
+		<a href="#" class="active">{{ i }}</a>
+		{% else %}
+		<a href="?page={{ i }}">{{ i }}</a>
+		{% endif %}
+		{% endfor %}
+		{% if products.has_next %}
+		<a href="?page={{ products.next_page_number }}" class="next-arrow"><i class="fa fa-long-arrow-right"
+				aria-hidden="true"></i></a>
+		{% else %}
+		<a class="disabled"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
+		{% endif %}
+	</div>
+	{% endif %}
+</div>
+
+{% endblock %}

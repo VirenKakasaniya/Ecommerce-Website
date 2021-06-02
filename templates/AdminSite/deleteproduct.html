@@ -1,0 +1,42 @@
+{% extends 'Adminsite/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Product Details Page</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="{% url 'AdminDashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Delete</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<div class="container">
+    <div class="billing_details">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Are you sure you want to delete?</h3>
+                <form class="row contact_form" action="#" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="primary-btn">Delete</button>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <a href="{% url 'AdminDashboard'  %}" class="primary-btn">Cancel</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

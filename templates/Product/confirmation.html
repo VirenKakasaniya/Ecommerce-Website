@@ -1,0 +1,117 @@
+{% extends 'Product/main.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Confirmation</h1>
+				<nav class="d-flex align-items-center">
+					<a href="{% url 'Dashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Confirmation</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Order Details Area =================-->
+<section class="order_details section_gap">
+	<div class="container">
+		<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
+		<div class="row order_d_inner">
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>Order Info</h4>
+					<ul class="list">
+						<li><a href="#"><span>Order Transaction_id</span> : {{order.transaction_id}}</a></li>
+						<li><a href="#"><span>Date</span> : {{order.date_orderd}}</a></li>
+						<li><a href="#"><span>Total</span> : ${{order.get_cart_total}}</a></li>
+						<li><a href="#"><span>Payment method</span> : Check payments</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>User Information</h4>
+					<ul class="list">
+						<li><a href="#"><span>Email</span> : {{user.email}}</a></li>
+						<li><a href="#"><span>First Name</span> : {{user.first_name}} </a></li>
+						<li><a href="#"><span>Last Name</span> :  {{user.last_name}}</a></li>
+						<li><a href="#"><span>Mobile No  </span> : {{profile.mobile_no}}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>Shipping Address</h4>
+					<ul class="list">
+						<li><a href="#"><span>Street</span> : {{address.addressline_1}}</a></li>
+						<li><a href="#"><span>City</span> : {{address.city}}</a></li>
+						<li><a href="#"><span>Country</span> : {{address.country}}</a></li>
+						<li><a href="#"><span>Postcode </span> :{{address.zipcode}} </a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div class="order_details_table">
+			<h2>Order Details</h2>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Product</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+						<tr>
+							<td>
+								<p>{{item.product.name}}</p>
+							</td>
+							<td>
+								<h5>x {{item.quantity}}</h5>
+							</td>
+							<td>
+								<p>${{item.get_total}}</p>
+							</td>
+						</tr>
+						{% endfor %}
+				
+						<tr>
+							<td>
+								<h4>Total</h4>
+							</td>
+							<td>
+								<h5></h5>
+							</td>
+							<td>
+								<p>${{order.get_cart_total}}</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+
+		
+	</div>
+</section>
+<!--================End Order Details Area =================-->
+
+{% endblock %}
+
+{% block script%}
+    <script type="text/javascript">
+        {% for message in messages %}
+        alert('{{ message }}');
+        {% endfor %}
+    </script>
+{% endblock %}

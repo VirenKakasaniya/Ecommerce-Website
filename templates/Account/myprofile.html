@@ -1,0 +1,74 @@
+{% extends 'Account/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>My Profile</h1>
+				<nav class="d-flex align-items-center">
+					<a href="{% url 'Dashboard' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="{% url 'profile' %}">My Profile</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+<div class="container">
+	<div class="billing_details">
+		<div class="row">
+			<div class="col-lg-8">
+				<h3>Profile</h3>
+				<form class="row contact_form" action="#" method="POST">
+					{% block addCsrf %}
+
+					{% endblock %}
+					{% for field in User_form.visible_fields %}
+					<div class="col-md-6 form-group p_star">
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+						{{ field|add_class:'form-control' }}
+					</div>
+					{% endfor %}
+					{% for field in Profile_form.visible_fields %}
+					<div class="col-md-6 form-group p_star">
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+						{{ field|add_class:'form-control' }}
+					</div>
+					{% endfor %}
+					{% for field in ShippingAddress_form.visible_fields %}
+					<div class="col-md-6 form-group p_star">
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+						{{ field|add_class:'form-control' }}
+					</div>
+					{% endfor %}
+					
+					{% block profile %}
+					
+					<div class="col-md-12 form-group">
+						<a class="primary-btn" href="{% url 'EditProfile' %}">EDIT PROFILE</a>
+					</div>
+					{% endblock %}
+				</form>
+				{% if Profile_form.errors %}
+                        {% for field in Profile_form %}
+                            {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ field.label }} ==> </strong><span>{{ error|escape }}</strong>
+                                
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

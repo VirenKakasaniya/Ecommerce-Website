@@ -1,0 +1,15 @@
+{% extends 'Account/myprofile.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block addCsrf %}
+{% csrf_token %}
+{% endblock %}
+
+{% block profile %}
+<div class="col-md-12 form-group">
+	<button type="submit" value="submit" class="primary-btn">SAVE</button>
+</div>
+
+{% endblock %}
